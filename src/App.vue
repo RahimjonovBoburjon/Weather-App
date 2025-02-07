@@ -5,7 +5,7 @@
       <input v-model="city" @keyup.enter="getWeather" placeholder="Shahar nomini kiriting" class="input-field" />
       <button @click="getWeather" class="btn">Qidirish</button>
 
-      <div v-if="weather" class="weather-info">
+      <div v-if="weather && weather.weather && weather.weather.length > 0" class="weather-info">
         <h2>{{ weather.name }} - {{ weather.weather[0].description }}</h2>
         <p>Harorat: {{ weather.main.temp }}°C</p>
       </div>
@@ -32,14 +32,19 @@ export default {
     async getWeather() {
       if (!this.city) return;
       try {
-        const apiKey = '03a456ea66848038444e4f141ba0441f';
+        const apiKey = process.env.VUE_APP_OPENWEATHERMAP_API_KEY;
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${apiKey}&units=metric`);
         this.weather = response.data;
         this.error = '';
+        this.city = '';
       } catch (error) {
-        this.error = 'Shahar topilmadi yoki xatolik yuz berdi!';
+        if (error.response && error.response.status === 404) {
+          this.error = 'Shahar topilmadi!';
+        } else {
+          this.error = 'Xatolik yuz berdi: ' + error.message;
+        }
         this.weather = null;
-        console.log(error);
+        console.error(error);
       }
     }
   }
@@ -105,5 +110,9 @@ h1 {
 .error {
   margin-top: 20px;
   color: red;
+  background-color: #ffe6e6;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 4px;
 }
 </style>
