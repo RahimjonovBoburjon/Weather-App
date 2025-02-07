@@ -13,6 +13,7 @@
       <div v-if="error" class="error">
         <p>{{ error }}</p>
       </div>
+      <h3 class="footer">Powered by <a href="https://github.com/RahimjonovBoburjon">Bobur</a></h3>
     </div>
   </div>
 </template>
@@ -117,5 +118,10 @@ h1 {
   padding: 10px;
   border: 1px solid red;
   border-radius: 4px;
+}
+
+.footer {
+  margin-top: 8px;
+  color: #504e4e;
 }
 </style>
