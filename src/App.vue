@@ -60,7 +60,7 @@ export default {
 
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
+  background-color: #b3b3b9;
   display: flex;
   justify-content: center;
   align-items: center;
