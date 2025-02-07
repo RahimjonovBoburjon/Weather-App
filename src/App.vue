@@ -32,7 +32,7 @@ export default {
     async getWeather() {
       if (!this.city) return;
       try {
-        const apiKey = process.env.VUE_APP_OPENWEATHERMAP_API_KEY;
+        const apiKey = import.meta.env.VITE_APP_OPENWEATHERMAP_API_KEY;
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${apiKey}&units=metric`);
         this.weather = response.data;
         this.error = '';
