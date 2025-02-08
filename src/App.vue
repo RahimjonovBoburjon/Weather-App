@@ -7,7 +7,7 @@
 
       <div v-if="weather && weather.weather && weather.weather.length > 0" class="weather-info">
         <h2>{{ weather.name }} - {{ weather.weather[0].description }}</h2>
-        <p>Harorat: {{ weather.main.temp }}°C</p>
+        <h4>Harorat: {{ weather.main.temp }}°C</h4>
       </div>
 
       <div v-if="error" class="error">
@@ -45,6 +45,8 @@ export default {
           this.error = 'Shahar topilmadi!';
         } else {
           this.error = 'Xatolik yuz berdi: ' + error.message;
+          console.log(apiKey);
+
         }
         this.weather = null;
         console.error(error);
@@ -109,6 +111,24 @@ h1 {
 
 .weather-info {
   margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1e3a8a;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.weather-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #1d4ed8;
+}
+
+.weather-info h4 {
+  font-size: 18px;
+  margin: 5px 0;
 }
 
 .error {
